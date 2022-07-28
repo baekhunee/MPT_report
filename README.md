@@ -109,8 +109,12 @@ Key：用来存储属于该节点范围的key，这是MPT树实现树高压缩�
 Val：用来存储该节点的内容；
 
 如之前所提及的，前缀树中会出现严重的存储空间浪费的情况，如下图：
+![image](https://user-images.githubusercontent.com/105578152/181411332-0cdf8f00-fccf-4545-b301-9a20dfa054e4.png)
+
 
 针对这种情况，MPT树对此进行了优化：当MPT试图插入一个节点，插入过程中发现目前没有与该节点Key拥有相同前缀的路径。此时MPT把剩余的Key存储在叶子／扩展节点的Key字段中，充当一个”Shortcut“。
+
+![image](https://user-images.githubusercontent.com/105578152/181411355-b722d273-9709-4e59-a584-434a8fd3eb4e.png)
 
 例如图中我们将红线所圈的节点称为node1, 将紫色线所圈的节点称为node2。node1与node2共享路径前缀t，但是node1在插入时，树中没有与oast有共同前缀的路径，因此node1的key为oast，实现了编码路径的压缩。
 
